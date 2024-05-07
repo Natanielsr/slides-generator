@@ -1,0 +1,41 @@
+# Compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos de distribuição
+dist/
+build/
+*.egg-info/
+
+# Ambiente virtual
+env/
+venv/
+ENV/
+.pip/
+.pytest_cache/
+
+# Configurações do IDE e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Testes e relatórios
+.coverage
+.tox/
+.nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Logs
+*.log
+
+# Arquivos temporários e de cache
+.DS_Store
+Thumbs.db
+.cache/
+*.tmp
