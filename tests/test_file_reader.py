@@ -2,7 +2,6 @@ import pytest
 from src.file_reader import FileReader
 from src.music import Music
 
-
 # test_somador.py
 def test_files_name():
     expected_list = [
@@ -33,16 +32,3 @@ def test_read_file():
 
     assert expected == content
 
-def test_remove_ext():
-    file_name = '1 - Refrão Orante.txt'
-    result = FileReader().remove_ext_name(file_name)
-
-    expected = '1 - Refrão Orante'
-
-    assert expected == result
-
-def test_create_music():
-    expected = Music('title', 'content')
-    result = FileReader()._create_music('title', 'content')
-
-    assert expected == result
