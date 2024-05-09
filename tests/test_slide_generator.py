@@ -1,6 +1,7 @@
 import pytest
+import os
 from src.presentation_generator import PresentationGenerator
-
+from src.music import Music
 def test_create_music():
     lyric = "stanza1\n\nstanza2"
     result = PresentationGenerator([])._separate_stanzas(lyric)
@@ -8,4 +9,22 @@ def test_create_music():
     expected = ["stanza1","stanza2"]
 
     assert expected == result
+
+def test_create_presentation():
+    music = Music("title", "content")
+    musics = [music]
+    prsGen = PresentationGenerator(musics)
+    presentation = prsGen.generate_presentation_slides()
+
+    slide = presentation.slides[0]
+    assert slide.shapes.title.text == "title"
+    assert slide.placeholders[1].text == "content"
+
+    file_name = "test.pptx"
+    prsGen.save_presentation_file(file_name)
+
+    assert os.path.exists(file_name)
+    
+    os.remove(file_name)
+
 
