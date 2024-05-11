@@ -2,9 +2,11 @@ import pytest
 import os
 from src.presentation_generator import PresentationGenerator
 from src.music import Music
+
+FONT_SIZE = 42
 def test_create_music():
     lyric = "stanza1\n\nstanza2"
-    result = PresentationGenerator([])._separate_stanzas(lyric)
+    result = PresentationGenerator([], FONT_SIZE)._separate_stanzas(lyric)
 
     expected = ["stanza1","stanza2"]
 
@@ -13,7 +15,7 @@ def test_create_music():
 def test_create_presentation():
     music = Music("title", "content")
     musics = [music]
-    prsGen = PresentationGenerator(musics)
+    prsGen = PresentationGenerator(musics, FONT_SIZE)
     presentation = prsGen.generate_presentation_slides()
 
     slide = presentation.slides[0]
