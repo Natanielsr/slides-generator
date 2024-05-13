@@ -28,7 +28,11 @@ def test_files_name():
 def test_read_file():
     expected = "Jesus, tu és a luz dos olhos meus\nJesus, brilhe esta luz nos passos meus seguindo os teus"
 
-    content = FileReader().read_file('1 - Refrão Orante.txt')
+    content = FileReader().read_content_file('1 - Refrão Orante.txt')
 
     assert expected == content
 
+def test_abrir_arquivo_nao_existente():
+    with pytest.raises(FileExistsError) as excinfo:
+        FileReader().read_content_file("arquivo_que_nao_existe.txt")
+    assert str(excinfo.value) == "Error reading file arquivo_que_nao_existe.txt: [Errno 2] No such file or directory: 'musics/arquivo_que_nao_existe.txt'"

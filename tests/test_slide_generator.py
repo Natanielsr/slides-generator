@@ -29,4 +29,16 @@ def test_create_presentation():
     
     os.remove(file_name)
 
+    # Generates presentation slides for each music in the input list of musics
+def test_generate_presentation_slides_for_each_music():
+    # Arrange
+    musics = [Music("Title 1", "Lyrics 1"), Music("Title 2", "Lyrics 2")]
+    presentation_generator = PresentationGenerator(musics, FONT_SIZE)
+
+    # Act
+    presentation = presentation_generator.generate_presentation_slides()
+
+    # Assert
+    assert len(presentation.slides) == 2
+
 

@@ -7,14 +7,17 @@ class FileReader:
          self.__path = 'musics/'
          self.__ext = '*.txt'
     
-    def read_file(self, file_name):
+    def read_content_file(self, file_name):
         full_path = self.__path+file_name
-        # Abra o arquivo para leitura
-        arquivo = open(full_path, "r", encoding='utf-8')
-        # Leia todo o conteúdo do arquivo
-        content = arquivo.read()
-
-        return content
+        try:
+            # Abra o arquivo para leitura
+            arquivo = open(full_path, "r", encoding='utf-8')
+            # Leia todo o conteúdo do arquivo
+            content = arquivo.read()
+            arquivo.close()
+            return content
+        except Exception as e:
+            raise FileExistsError(f"Error reading file {file_name}: {str(e)}")
 
     def get_files_name(self):
         # Especifica o caminho da pasta
