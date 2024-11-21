@@ -12,6 +12,9 @@ class MusicList:
 
     def _create_music_list(self, txt_files_name):
         musics = []
+
+        if(txt_files_name is None):
+            return musics
         
         for file_name in txt_files_name:   
             title = Format.remove_ext_name(file_name)

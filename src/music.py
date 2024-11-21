@@ -1,5 +1,5 @@
 class Music:
-    def __init__(self, title, lyrics):
+    def __init__(self, title : str, lyrics : str):
         self.title = title
         self.lyrics = lyrics
         

@@ -28,3 +28,8 @@ def test_create_music_list():
     assert len(result) > 0
     assert isinstance(result[0], Music)
     assert result[0] == expected
+
+def test_create_music_list_null():
+    result = MusicList()._create_music_list(None)
+
+    assert result == []

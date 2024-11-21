@@ -10,6 +10,3 @@ if __name__ == "__main__":
     slideGen = PresentationGenerator(musics, FONT_SIZE)
     slideGen.generate_presentation_slides()
     slideGen.save_presentation_file()
-
-    
-    
