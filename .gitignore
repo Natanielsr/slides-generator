@@ -39,3 +39,4 @@ coverage.xml
 Thumbs.db
 .cache/
 *.tmp
+.~lock.slides.pptx#

@@ -1,6 +1,7 @@
 from pptx import Presentation
 from pptx.util import Pt
 from pptx.enum.text import PP_ALIGN
+from pptx.util import Inches
 from pptx.dml.color import RGBColor
 from src.slide_data import SlideData
 from src.font_size_calculation import FontSizeCalculation
@@ -18,8 +19,6 @@ class SlideGenerator:
         fsc = FontSizeCalculation()
         sfs = fsc.calcular_tamanho_fonte(slide.stanza)
         self.__stanza_font_size = Pt(sfs)
-
-        print(f"{slide.title} - font size: {sfs}")
 
     def create_stanza_slide(self):
         self._set_slide_title()
@@ -45,6 +44,10 @@ class SlideGenerator:
         text_frame = self.__content_shape.text_frame
         for p in text_frame.paragraphs:
             p.font.size = self.__stanza_font_size
-            p.level = 0
+            p.level = 0 # Define o nível da lista (0 para nível superior)
             p.alignment = PP_ALIGN.CENTER
             p.font.color.rgb = RGBColor(0, 0, 0)
+
+            # Remover os marcadores ou números
+            p.bullet = None  # Remove marcadores ou números
+            p.bullet_style = None  # Adicionalmente, tente remover o estilo de marcador (para números ou marcadores)
