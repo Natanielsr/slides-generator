@@ -6,6 +6,10 @@ class FontSizeCalculation:
     def calcular_tamanho_fonte(self, texto):
   
         num_caracteres = len(texto)
+
+        if num_caracteres == 0:
+            return 12 #default size
+        
         a = 563.2256986592307
         b = 0.5354202812578108
         tamanho_fonte = a / (num_caracteres ** b )

@@ -3,10 +3,11 @@ from pptx import Presentation
 from src.music import Music
 from src.slide_generator import SlideGenerator
 from src.slide_data import SlideData
+import traceback
 
 class PresentationGenerator:
 
-    def __init__(self, musics: List[Music], font_size: int): 
+    def __init__(self, musics: List[Music], font_size: int, insert_title : bool = False): 
         if not isinstance(font_size, int) or font_size <= 0:
             raise ValueError("font_size must be a positive integer")
         if not all(isinstance(music, Music) for music in musics):
@@ -14,7 +15,8 @@ class PresentationGenerator:
         self.__FONT_SIZE = font_size     
         self.__musics = musics  
         self.__presentation = Presentation()
-        self.__slide_layout = self.__presentation.slide_layouts[1]
+        self.__slide_layout = self.__presentation.slide_layouts[6]
+        self.__insert_title = insert_title
 
     def generate_presentation_slides(self):
         print("Generating presentation slides...")
@@ -26,12 +28,9 @@ class PresentationGenerator:
         return self.__presentation
     
     def add_blank_slide(self):
-        self.__presentation.slides.add_slide(self.__presentation.slide_layouts[0])
-
-    def save_presentation_file(self, file_name="slides.pptx"):
-        print("Saving file...")
-        self.__presentation.save(file_name)
-        print("Presentation file "+file_name+" saved with Success!")
+        slide_data = SlideData(0, "", "")
+        slideGen = SlideGenerator(self.__presentation, self.__slide_layout, slide_data)
+        slideGen.create_stanza_slide(False)
 
     def _generate_music_slides(self, music : Music):
         try:
@@ -43,12 +42,20 @@ class PresentationGenerator:
                     stanza)
             
                 slideGen = SlideGenerator(self.__presentation, self.__slide_layout, slide)
-                slideGen.create_stanza_slide()
+                slideGen.create_stanza_slide(self.__insert_title)
+
         except Exception as e:
             print(f"Error generating slides for music {music.title}: {str(e)}")
+            # Exibe a linha onde o erro ocorreu
+            traceback.print_exc()
 
     def _separate_stanzas(self, lyric):
         return lyric.strip().split('\n\n')
+    
+    def save_presentation_file(self, file_name="slides.pptx"):
+        print("Saving file...")
+        self.__presentation.save(file_name)
+        print("Presentation file "+file_name+" saved with Success!")
     
     
     
