@@ -18,6 +18,7 @@ class SlideGenerator:
         if(insert_title):
             self.add_title()
         self.add_content()
+        self.add_img_logo()
 
     def set_background_color(self):
         # Define o fundo preto do slide
@@ -49,6 +50,15 @@ class SlideGenerator:
 
          # Habilita a quebra de linha automática
         tf.word_wrap = True
+
+    def add_img_logo(self):
+        img_path = 'img/logo.png'
+
+        top = Inches(5.25)
+        left = Inches(7.75)
+        height = Inches(2)
+        pic = self.__slide_pptx.shapes.add_picture(img_path, left, top, height=height)
+
    
     def calculate_font_size(self):
         fsc = FontSizeCalculation()
